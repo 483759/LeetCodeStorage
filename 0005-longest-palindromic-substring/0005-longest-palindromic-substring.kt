@@ -1,17 +1,10 @@
 class Solution {
     fun longestPalindrome(s: String): String {
-        
-    var result: Pair<String, Int> = s[0].toString() to 1
-
-    for (i in s.indices) {
-        for (j in result.second..s.length) {
-            if (i + j > s.length) break
-            val substring = s.substring(i, i + j)
-            if (substring.reversed() == substring) {
-                result = if (j > result.second) substring to j else result
-            }
-        }
+    for (i in s.length downTo 0) {
+        for (j in 0..s.length - i)
+            if (s.substring(j, j + i) == s.substring(j, j + i).reversed()) return s.substring(j, j + i)
     }
-    return result.first
+
+    return s[0].toString()
     }
 }
